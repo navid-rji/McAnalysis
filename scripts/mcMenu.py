@@ -1,5 +1,4 @@
-import product
-import dataProcessing
+from scripts import product
 
 
 class Menu:

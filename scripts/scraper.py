@@ -1,7 +1,6 @@
 from selenium import webdriver
 import csv
-import dataProcessing
-import progressbar
+from scripts import progressbar, dataProcessing
 
 
 def get_page_html(url):  # opens and renders a page and returns the html code as a string
@@ -111,5 +110,13 @@ def scrape_and_insert(url, line, path):
     data = scrape(url)
     with open(path, 'r') as f:
         csv_data = list(csv.reader(f))
-    csv_data.insert(line, data)
-    save_data(csv_data)
+    csv_data.insert(line, dataProcessing.scraped_data_to_product(data).to_list())
+    save_data(csv_data, path)
+
+
+def scrape_and_append(url, path):
+    data = scrape(url)
+    with open(path, 'r') as f:
+        csv_data = list(csv.reader(f))
+    csv_data.append(data)
+    save_data(csv_data, path)

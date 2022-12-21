@@ -30,7 +30,7 @@ class Product:
             self.protein = 0
             self.salt = 0
 
-        self.menuType = ''
+        self.menuType = None
         self.drink = False
         self.price = 0
         self.is_side_small = False
@@ -42,6 +42,17 @@ class Product:
         return [self.name, self.weight, self.kJ, self.kcal, self.fat, self.saturated_fats,
                 self.carbons, self.sugar, self.fiber, self.protein, self.salt, self.menuType, self.drink,
                 self.price, self.is_side_small]
+
+    def to_database_list(self) -> list:
+        lst = self.to_list()
+        database_list = lst[:11]
+        database_list.append(self.price)
+        if self.drink:
+            database_list.append('drink')
+        else:
+            database_list.append(self.menuType)
+        return database_list
+
 
     def get_nutrition_table(self) -> list:
         nutrition = self.to_list()[1:11]

@@ -1,7 +1,4 @@
-import calculations
-import dataProcessing
-import product
-import scraper
+from scripts import dataProcessing, product, scraper
 import os.path
 
 PRODUCT_LINK_PATH = 'product_links.txt'
